@@ -57,10 +57,10 @@ exports.searchItem =async(req,res)=>{
     try {
         const item = await Items.find({
             '$or':[
-                {type:{$regex:req.params.key}},
-                {price:{$regex:req.params.key}},
-                {category:{$regex:req.params.key}},
-                {title:{$regex:req.params.key}},
+                {type:{$regex:new RegExp(req.params.key,'i')}},
+                {price:{$regex:new RegExp(req.params.key,'i')}},
+                {category:{$regex:new RegExp(req.params.key,'i')}},
+                {title:{$regex:new RegExp(req.params.key,'i')}},
             ]
         }).sort({createdAt:-1}).lean()
         res.json({result:item})
